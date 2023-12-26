@@ -1,4 +1,4 @@
-import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { LoginCallback } from "@okta/okta-react";
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -18,13 +18,11 @@ import { StripeProvider } from "./StripeProvider";
 function App() {
   const { isAuthenticated } = useAuth0();
 
-  console.log(process.env.REACT_APP_AUTH_PROVIDER);
-
   if (process.env.REACT_APP_AUTH_PROVIDER === "Okta") {
     return (
       <div className="App">
         <header className="App-header">
-          <HashRouter>
+          <BrowserRouter>
             <OktaProviderWithNavigate>
               <Routes>
                 <Route path="/" element={<Login />} />
@@ -58,7 +56,7 @@ function App() {
                 />
               </Routes>
             </OktaProviderWithNavigate>
-          </HashRouter>
+          </BrowserRouter>
         </header>
       </div>
     );
@@ -66,7 +64,7 @@ function App() {
     return (
       <div className="App">
         <header className="App-header">
-          <HashRouter>
+          <BrowserRouter>
             <Auth0ProviderWithNavigate>
               <StripeProvider>
                 <Routes>
@@ -96,7 +94,7 @@ function App() {
                 </Routes>
               </StripeProvider>
             </Auth0ProviderWithNavigate>
-          </HashRouter>
+          </BrowserRouter>
         </header>
       </div>
     );
